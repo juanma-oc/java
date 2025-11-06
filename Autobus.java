@@ -37,7 +37,6 @@ public class Autobus {
                 else {
                     System.out.println("Introduce un numero mayor a 0");
                 }
-
             }
         }while (distanciaViaje != 0);
     }
