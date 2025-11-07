@@ -12,7 +12,7 @@ public class Arrays {
 		notas[0]=nota0;
 		int nota1 = ES.leeN("Dime la nota del alumno 2: ");
 		notas[1]=nota1;
-		for(int i=2;i<(cantAlumnos-1);i++){
+		for(int i=2;i<cantAlumnos;i++){
 			notas[i]= aleatorio(0,10);
 		}
 		
@@ -56,7 +56,7 @@ public class Arrays {
 	
 	public static int calcMin (int[] notas, int cantAlumnos ){
 		int notaMin = 10;
-		for (int i=0;i<(cantAlumnos-1);i++) {
+		for (int i=0;i<cantAlumnos;i++) {
 			if (notas[i]<notaMin){
 				notaMin = notas[i];	
 			}
@@ -66,7 +66,7 @@ public class Arrays {
 	
 	public static int calcMax (int[] notas, int cantAlumnos){
 		int notaMax = 0;
-		for (int i=0;i<(cantAlumnos-1);i++) {
+		for (int i=0;i<cantAlumnos;i++) {
 			if (notas[i]>notaMax){
 				notaMax = notas[i];		
 			}
@@ -76,7 +76,7 @@ public class Arrays {
 
 	public static int calcNotaM (int[] notas, int cantAlumnos){
 		int notaMedia=0;
-		for (int i=0;i<(cantAlumnos-1);i++) {
+		for (int i=0;i<cantAlumnos;i++) {
 			notaMedia = notaMedia + notas[i];			
 		}
 		return notaMedia / cantAlumnos;
@@ -84,7 +84,7 @@ public class Arrays {
 
 	public static int calcAprob (int[] notas, int cantAlumnos){
 		int numAprobados = 0;
-		for (int i=0;i<(cantAlumnos-1);i++) {
+		for (int i=0;i< cantAlumnos;i++) {
 			if (notas[i]>=5)
 				numAprobados += 1;
 		}
