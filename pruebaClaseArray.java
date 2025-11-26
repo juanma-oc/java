@@ -2,67 +2,103 @@ import ES.ES;
 import java.lang.Math;
 import java.util.Arrays;
 
+public class pruebaClaseArray{
 
-public class pruebaClaseArray {	
-
-	public static void main(String[] args){
-		int numEnteros[] = new int [1000];
-		Arrays.fill(numEnteros,100);
-		
-		for (int i=0;i<numEnteros.length;i++){
-			numEnteros[i] = aleatorio(1,100);
+	public static void main(String[] args) {
+        //Crea el array y luego lo rellena de numeros aleatorios del 1 al 100
+		int numeros1 [] = new int [1000];
+		Arrays.fill(numeros1, 100);
+		for(int i = 0; i < 1000; i++){
+			numeros1[i] = aleatorio(1,100);
 		}
-		System.out.println("Array1 sin ordenar");	
-		imprArrays(numEnteros);
-		System.out.println();		
-	
-		Arrays.sort(numEnteros);
-		System.out.println("Array1 ordenado");
-		imprArrays(numEnteros);
-		System.out.println();	
+		//Lista todo el contenido del array
+		System.out.println("Array desordenado: ");
+		listarNumeros(numeros1);
+        System.out.println();
 
-		int numEnteros2[] = new int [10];
-		System.out.println("Array2 sin rellenar");
-		imprArrays(numEnteros2);
-		System.out.println();	
+        //Ordena los numeros dentro del array y luego lo lista
+		Arrays.sort(numeros1);
+		System.out.println("Array ordenado: ");
+		listarNumeros(numeros1);
+        System.out.println();
 		
-		numEnteros2=Arrays.copyOf(numEnteros,numEnteros.length);
-		System.out.println("Array2 copiado del Array1");	
-		imprArrays(numEnteros2);
-		System.out.println();	
-		
-		int n = ES.leeN("Introduce un numero para buscar (1-100): ",1,100);
+
+        //Crea un array con 10 posiciones y los lista
+		int numeros2 [] = new int [10];
+        listarNumeros(numeros2);
+        System.out.println();
+
+        //Copia todo el contenido del primer array y lo introduce en el numero 2. Luego lo lista
+        numeros2 = Arrays.copyOf(numeros1,numeros1.length);
+		listarNumeros(numeros2);
+        System.out.println();		
+
+        //Pregunta un numero para buscarlo en el array 
+		int num = ES.leeN("Introduce un numero: ", 1, 100);
 		int cont = 0;
-		for (int i = 0; i < numEnteros.length;i++){
-			if (numEnteros[i]==n && cont == 0){
-				System.out.println("La primera posicion en la que sale el numero "+n+" es "+i);	
-				cont++;
-			}else if (numEnteros[i]==n)
-				cont++;
+        //Recorre el array y comprueba las veces repetidas y la primera vez que aparece
+		for (int i = 0; i < numeros2.length; i++){
+			if (numeros2[i] == num ){
+				if (cont == 1){
+				    System.out.println("El numero " + num + " aparece por primera vez en la posicion " + i);
+			    }
+                cont++;
+			}
 		}
-		System.out.println("El numero "+n+" aparece "+ cont+" veces");
+		System.out.println("El numero introducido aparece " + cont + " veces");
+        System.out.println();
+
+        //Creo una variable que muestra la primera posicion del numero que se busca
+        int busc = Arrays.binarySearch(numeros2,num);
+        //Probando si sale en la misma linea, me he fijado que el binarySearch no muestra la primera posicion en la que sale, casi nunca coincide con el de arriba
+        System.out.println("El numero " + num + " aparece por primera vez en la posicion " + busc);
+        /*if (busc > -1)
+            System.out.println("El numero introduce aparece "+encontrarNum(numeros2,num,busc,1)+" veces.");*/
 		
-		int h = Arrays.binarySearch(numEnteros,n)
-		for (int i = h; i==n;i++)                       
 		
+		//
+		System.out.println();
+		System.out.println("El numero introduce aparece "+encontrarRec(numeros2,num)+" veces.");
 		
 	}
 	
-	public static void imprArrays(int [] numeros){
-		for (int i=0; i<numeros.length;i++){
-			System.out.print(numeros[i] + ", ");
-			if (i%50==0 && i>0)
-			System.out.println("");	
+	//Funcion de forma recursiva que si funciona
+	public static int encontrarRec(int [] numeros, int numBuscar){
+		int posicionEncontrada = Arrays.binarySearch(numeros,numBuscar);
+
+		if (posicionEncontrada < 0)
+			return 0;
+		else{
+			int array1 [] = Arrays.copyOfRange(numeros,0, posicionEncontrada);
+			int array2 [] = Arrays.copyOfRange(numeros,posicionEncontrada+1,numeros.length);
+			return 1+encontrarRec(array1,numBuscar) + encontrarRec(array2,numBuscar);
 		}
-		System.out.println();		
 	}
-	
-	public static int aleatorio(int min, int max) {
-		return (int) Math.floor(Math.random()*(max-min+1)+min);
+   
+    //Funcion para revisar las veces que se repite el numero dentro del array, hecha de forma recursiva hasta que no encuentra mas numeros iguales.
+    // Recibe el array, el numero que se quiere buscar, la primera posicion en la que aparecio y las veces que se ha encontrado
+/*    public static int encontrarNum (int[] listaNumero, int numBuscar, int inicio, int vecesEncontrado){
+        if (listaNumero[inicio] != numBuscar)
+            return vecesEncontrado;
+        else {
+            vecesEncontrado++;
+            inicio++;
+            return encontrarNum(listaNumero,numBuscar,inicio,vecesEncontrado);
+        }
+    }*/
+    
+	public static int aleatorio(int min, int max){
+		int numAle =  (int) Math.floor(Math.random()*(max-min+1)+min);
+		return numAle;
 	}
-		
-	public static float redondear(float numero, int dec){	
-		return (float) (Math.round((numero)*(Math.pow(10,dec)))/(Math.pow(10,dec)));
-	}
-	
+
+    public static void listarNumeros (int[] listarNumeros){
+	    for (int i = 0; i < listarNumeros.length; i++){
+			System.out.print(listarNumeros[i] + " ");
+			if (i % 50 == 0 && i>0){
+				System.out.println();
+			}
+		}
+        System.out.println();
+    }
 }

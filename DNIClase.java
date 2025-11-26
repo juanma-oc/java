@@ -11,7 +11,7 @@ public class DNIClase {
             comprob = args[0];
 
             //Comprueba si algunas de las dos opciones si da o no
-            if ((comprob.matches("[0-9]{8}[- ]?[A-Z]?")) )
+            if ((comprob.matches("[0-9]{8}[\s\-]?[A-Z]?")) )
                 dni = args[0];
             else{
                 System.out.println("El argumento introducido no es correcto");
@@ -40,9 +40,9 @@ public class DNIClase {
         String dni;
         do{
             dni = ES.leeDeTeclado("Introduce los digitos del DNI: ");
-            if ((!dni.matches("[0-9]{8}[- ]?[A-Z]?")))
+            if ((!dni.matches("[0-9]{8}[\s\-]?[A-Z]?")))
                 System.out.println("Error! Debes introducir 8 digitos");
-        }while ((!dni.matches("[0-9]{8}[- ]?[A-Z]?")));
+        }while ((!dni.matches("[0-9]{8}[\s\-]?[A-Z]?")));
         return dni;
     }
 }
