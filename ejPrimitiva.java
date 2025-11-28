@@ -33,13 +33,23 @@ public class ejPrimitiva {
 		System.out.println(cabecera);
 		System.out.println();
 		
+		int num;
+		
 		for (int i=0;i<primitiva.length;i++){
 			System.out.print("Apuesta n"+(i+1)+". \t\t");			
 			for(int j=0;j<primitiva[i].length;j++){
 				if (j<7)
-					primitiva[i][j]=(aleatorio(1,49));
+					do{
+						num=aleatorio(1,49);
+						if (Arrays.binarySearch(primitiva[i],num)==-1)
+							primitiva[i][j] = num;						
+					}while (Arrays.binarySearch(primitiva[i],num)>=0);
 				else
 					primitiva[i][j]=(aleatorio(0,9));
+			}
+			Arrays.sort(primitiva[i],0,6);
+			
+			for(int j=0;j<primitiva[i].length;j++){
 				System.out.print(primitiva[i][j]+"\t");
 			}
 			System.out.println();
