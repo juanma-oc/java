@@ -31,7 +31,6 @@ public class ejPedro {
 	}
 		
 	
-	
 	public static int [] primitiva (){
 		return combinacion(0,49,6);
 	}
