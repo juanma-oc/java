@@ -1,6 +1,6 @@
-import ES.ES;
 import java.lang.Math;
 import java.util.Arrays;
+import ES.ES;
 
 public class ejExamenDic {
 	public static void main(String[] args){
@@ -43,33 +43,35 @@ public class ejExamenDic {
 	}	
 	
     public static void inicializarSala(String [][][] butacas){
-        for (int k=0;k<3;k++)
-			for (int i = 0; i < butacas[k].length;i++)
-				for(int j=0;j<butacas[k][i].length;j++)
-					butacas[k][i][j]="L";
-
-    }
+        for (int i=0;i<butacas.length;i++){
+			for (int j=0;j<butacas[i].length;j++){
+				for(int k=0;k<butacas[i][j].length;k++){
+					butacas[i][j][k]="L";
+				}
+			}
+		}	
+	}
 
     public static void mostarSala(String [][][] butacas, int sesion){
-        char[] letra = {
-            'A','B','C','D','E'
-        };
+        char[] letra = {'A','B','C','D','E'};
 		
 		String sesionDia;
-		if (sesion==1)
+		if (sesion==1){
 			sesionDia="Manaña";
-		else if (sesion==2)
+		}else if (sesion==2){
 			sesionDia="Tarde";
-		else
+		}else{
 			sesionDia="Noche";
+		}
 		
 		System.out.println("Sesion de "+sesionDia);
         System.out.println("\t1.\t2.\t3.\t4.\t5.");
         for (int i=0;i<butacas[sesion].length;i++){
             System.out.print(letra[i]+"\t");
-            for(int j=0;j<butacas[sesion][i].length;j++)
+            for(int j=0;j<butacas[sesion][i].length;j++){
                 System.out.print(butacas[sesion][i][j]+"\t");
-            System.out.println();
+            }
+			System.out.println();
         }    
     }
 
